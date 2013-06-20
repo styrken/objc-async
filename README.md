@@ -19,4 +19,4 @@ Simple wrappers around GCD
 }];
 ```
 
-4. Enyoy using async tasks with ease
+Enyoy using async tasks with ease
