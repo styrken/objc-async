@@ -3,7 +3,7 @@ objc-async
 
 Simple wrappers around GCD
 
-1. Copy objc_async.h and .m do your project
+1. Copy objc_async.h and .m to your project
 2. Import "objc_async.h" in your file
 3. Do this
 
