@@ -8,6 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^AsyncCompletionBlock)();
+
 @interface objc_async : NSObject
+
+/**
+ * Executes an async task on a background thread
+ *
+ */
++ (void) asyncTask:(AsyncCompletionBlock)block;
+
+/**
+ * Executes an async task on main thread
+ *
+ */
++ (void) asyncTaskOnMainThread:(AsyncCompletionBlock)block;
 
 @end
