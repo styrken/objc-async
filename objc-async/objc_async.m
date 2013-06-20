@@ -10,15 +10,24 @@
 
 @implementation objc_async
 
-+ (void) asyncTask:(AsyncCompletionBlock)block
++ (dispatch_queue_t) highPriorityQueue
 {
-	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-	dispatch_async(queue, block);
+	return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
 }
 
-+ (void) asyncTaskOnMainThread:(AsyncCompletionBlock)block
++ (dispatch_queue_t) mainQueue
 {
-	dispatch_async(dispatch_get_main_queue(), block);
+	return dispatch_get_main_queue();
+}
+
++ (void) asyncTask:(AsyncTaskBlock)block
+{
+	dispatch_async([self highPriorityQueue], block);
+}
+
++ (void) asyncTaskOnMainThread:(AsyncTaskBlock)block
+{
+	dispatch_async([self mainQueue], block);
 }
 
 @end

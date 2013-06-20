@@ -7,6 +7,7 @@
 //
 
 #import "objc_asyncTests.h"
+#import "objc_async.h"
 
 @implementation objc_asyncTests
 
@@ -24,9 +25,17 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void) testAyncTask
 {
-    STFail(@"Unit tests are not implemented yet in objc-asyncTests");
+	__block BOOL changeMe = false;
+	[objc_async asyncTask:^{
+		changeMe = true;
+	}];
+
+	int i = 0;
+	while(i < 100000) { i++; }
+
+	STAssertTrue(changeMe, @"ChangeMe did not change to true");
 }
 
 @end

@@ -8,20 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^AsyncCompletionBlock)();
+/** Aync Task Block
+ A block that does some work
+*/
+typedef void (^AsyncTaskBlock)();
 
 @interface objc_async : NSObject
 
-/**
- * Executes an async task on a background thread
- *
- */
-+ (void) asyncTask:(AsyncCompletionBlock)block;
+#pragma mark - Queues
 
-/**
- * Executes an async task on main thread
- *
- */
-+ (void) asyncTaskOnMainThread:(AsyncCompletionBlock)block;
+/** High priority queue
+ Gets an high priority queue
+*/
++ (dispatch_queue_t) highPriorityQueue;
+
+/** Main queue
+ Gets main queue (main thread/gui thread) queue
+*/
++ (dispatch_queue_t) mainQueue;
+
+#pragma mark - Async tasks
+
+/** Aync Task
+ Executes an async task on a background thread
+ Uses an HIGH priority queue
+*/
++ (void) asyncTask:(AsyncTaskBlock)block;
+
+/** Async Task on Main Thread
+ Executes an async task on main thread
+*/
++ (void) asyncTaskOnMainThread:(AsyncTaskBlock)block;
 
 @end
